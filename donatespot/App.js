@@ -19,11 +19,13 @@ import {
 import SplashScreen from './src/screens/SplashScreen';
 import Home from './src/screens/Home';
 import ItemsList from './src/screens/ItemsList';
+import Login from './src/screens/Login';
 import {createSwitchNavigator, createAppContainer} from 'react-navigation';
 
 const InitialNavigator = createSwitchNavigator({
   Splash: SplashScreen,
-  App: ItemsList
+  App: Home,
+  LoginScreen: Login
 });
 
 export default createAppContainer(InitialNavigator);
