@@ -17,22 +17,7 @@ class Login extends React.Component {
 
   
   componentDidMount() {
-    let token;
-
-    axios.post('https://donatespot.diplomads.com/wp-json/jwt-auth/v1/token',{
-      username: 'sogyal',
-      password: 'sogyals429'
-    })
-    .then((response) => {
-      if(response.status===200){
-        token = response.data.token
-        this.setState({
-          token: token
-        })
-      }else{
-        Alert.alert('Failed to get token');
-      }
-    });
+   
   }
 
   render() {
@@ -53,12 +38,26 @@ class Login extends React.Component {
 
   callApi(){
 
-    if(state.username != null && state.password != nil){
-      
-    }
-    // console.log(this.state.username)
-    // console.log(this.state.password)
-    // console.log(this.state.token)
+    let token;
+    axios.post('https://donatespot.diplomads.com/wp-json/jwt-auth/v1/token',{
+      username: this.state.username,
+      password: this.state.password
+    })
+    .then((response) => {
+      if(response.status===200){
+        token = response.data.token
+        this.setState({
+          token: token
+       })
+       this.props.navigation.navigate('App',{
+         token:token
+       });
+      }else{
+        Alert.alert('Failed to get token');
+      }
+    }).catch(err=>{
+      console.log(err);
+    });
   }
 }
 
