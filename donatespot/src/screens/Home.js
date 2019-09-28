@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
+import {View, Text, Button } from 'react-native';
 class Home extends React.Component {
   static navigationOptions = {
     title: 'Home'
@@ -11,9 +11,9 @@ render() {
    alignItems:'center',
    justifyContent:'center'
   }}>
-<Button title="Go to Profile screen"
-    onPress={() => this.props.navigation.navigate('Profile')}
-   />
+    <Button title="Go to Profile screen"
+    onPress={() => this.props.navigation.navigate('LoginScreen')}
+   /> 
   </View>
 );
 }
