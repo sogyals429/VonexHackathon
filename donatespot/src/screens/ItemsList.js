@@ -730,7 +730,9 @@ render() {
         title={l.name}
         subtitle={l.categories[0].name}
         bottomDivider
-        onPress={() => this.props.navigation.navigate('Details')}
+        onPress={() => this.props.navigation.navigate('Details',{
+            product:l
+        })}
       />
     ))
     }
