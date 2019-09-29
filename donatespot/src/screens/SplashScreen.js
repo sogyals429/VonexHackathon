@@ -37,7 +37,7 @@ const styles = {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'orange'
+    backgroundColor: 'red'
   },
   textStyles: {
     color: 'white',

@@ -4,6 +4,7 @@ import {
   View,
   Alert,
   Picker,
+  BackHandler
 } from 'react-native';
 import { Input,Button,Text } from 'react-native-elements';
 import axios from 'axios';
@@ -32,6 +33,18 @@ class Register extends React.Component {
 
       </View>
     );
+  }
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  onBackPress = () => {
+    this.props.navigation.navigate('App');
+    return true;
   }
 
   setStateButton1(){
