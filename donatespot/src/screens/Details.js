@@ -6,12 +6,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class Details extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    const { navigation } = this.props;
+    this.state = {product:navigation.getParam('product')};
   }
 
   render() {
-    const { navigation } = this.props;
-    var product = navigation.getParam('product');
     return (
       <View
         style={{
@@ -20,10 +19,10 @@ class Details extends React.Component {
           justifyContent: 'center',
         }}>
           <Image style={{height:250,width:400}}
-          source={{uri:product.images[0].src}}
+          source={{uri:this.state.product.images[0].src}}
           />
-          <Text>Name: {product.name}</Text>
-          <Text style={{width:350}}>Description: {product.description}</Text>
+          <Text>Name: {this.state.product.name}</Text>
+          <Text style={{width:350}}>Description: {this.state.product.description}</Text>
           <Button title="Request Pickup" onPress={()=>this.requestPick(this)}/>
         </View>
     );
@@ -31,7 +30,7 @@ class Details extends React.Component {
 
   requestPick(){
     this.props.navigation.navigate('Contact',{
-      product:this.product
+      product:this.state.product
     });
   }
 }
