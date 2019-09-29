@@ -1,7 +1,7 @@
 import { ListItem, Input, SearchBar } from 'react-native-elements'
 import React from 'react';
 import axios from 'axios';
-import {View, SafeAreaView, ScrollView, ActivityIndicator} from 'react-native';
+import {View, SafeAreaView, ScrollView, ActivityIndicator, Alert} from 'react-native';
 
 class ItemsList extends React.Component {
     
@@ -42,7 +42,7 @@ class ItemsList extends React.Component {
         this.setState({showLoading:false});
     })
     .catch(error => {
-        console.log("axios error: " + error);
+      Alert.alert("Data Load Error");
     this.setState({showLoading:false});
     });
 

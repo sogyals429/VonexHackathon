@@ -3,7 +3,8 @@ import {
   StyleSheet,
   View,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  BackHandler
 } from 'react-native';
 import { Image,Input,Button,Text } from 'react-native-elements';
 import axios from 'axios';
@@ -13,6 +14,31 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {token:'',username:'',password:'',showLoading:false};
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  onBackPress = () => {
+ 
+    //Code to display alert message when use click on android device back button.
+    Alert.alert(
+      ' Exit From App ',
+      ' Do you want to exit From App ?',
+      [
+        { text: 'Yes', onPress: () => BackHandler.exitApp() },
+        { text: 'No', onPress: () => console.log('NO Pressed') }
+      ],
+      { cancelable: false },
+    );
+ 
+    // Return true to enable back button over ride.
+    return true;
   }
 
   render() {
