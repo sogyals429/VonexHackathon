@@ -11,7 +11,7 @@ class Details extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    var a = navigation.getParam('product');
+    var product = navigation.getParam('product');
     return (
       <View
         style={{
@@ -22,18 +22,18 @@ class Details extends React.Component {
           <Avatar
           size="large"
           rounded
-          source={{uri:a.images[0].src}}
+          source={{uri:product.images[0].src}}
           />
-          <Text>Name: {a.name}</Text>
-          <Text>Description: {a.description}</Text>
+          <Text>Name: {product.name}</Text>
+          <Text>Description: {product.description}</Text>
           <Button title="Request Pickup" onPress={()=>this.requestPick(this)}/>
         </View>
     );
   }
 
   requestPick(){
-    this.props.navigation.navigate('contact',{
-      contact:a
+    this.props.navigation.navigate('LoginScreen',{
+      product:product
     });
   }
 }

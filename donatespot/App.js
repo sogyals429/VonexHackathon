@@ -23,12 +23,14 @@ import Login from './src/screens/Login';
 import Contact from './src/screens/Contact';
 import {createSwitchNavigator, createAppContainer} from 'react-navigation';
 import Details from './src/screens/Details';
+import Register from './src/screens/Register';
 
 const InitialNavigator = createSwitchNavigator({
   Splash: SplashScreen,
   App: ItemsList,
   Details: Details,
   LoginScreen: Login,
+  RegisterScreen:Register,
   Contact: Contact
 });
 
