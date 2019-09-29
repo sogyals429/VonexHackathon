@@ -16,6 +16,8 @@ class Contact extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    var product = navigation.getParam('product');
     return ( 
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Input placeholder='Name' label='Name' onChangeText={(text)=>this.setState({name:text})}/>

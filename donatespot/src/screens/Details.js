@@ -32,8 +32,8 @@ class Details extends React.Component {
   }
 
   requestPick(){
-    this.props.navigation.navigate('LoginScreen',{
-      product:product
+    this.props.navigation.navigate('Contact',{
+      product:this.product
     });
   }
 }
