@@ -59,6 +59,7 @@ class Contact extends React.Component {
 }).then((response) => {
      if(response.status===200){
       Alert.alert('Request Sent Successfully');
+      this.props.navigation.navigate('ItemsList');
       }
     else{
      Alert.alert('Failed to send');

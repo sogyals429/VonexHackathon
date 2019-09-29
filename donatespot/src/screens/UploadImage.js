@@ -3,6 +3,7 @@ import {
   Alert,
   ActivityIndicator,
   SafeAreaView,
+  BackHandler
 } from 'react-native';
 import { Input,Button,Text } from 'react-native-elements';
 import axios from 'axios';
@@ -15,9 +16,23 @@ class UploadImage extends React.Component {
     this.state = {productName:'',price:'',productDesc:'',showLoading:false}
   }
 
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  onBackPress = () => {
+    this.props.navigation.navigate('ItemsList');
+    return true;
+  }
+
   render() {
     return ( 
       <SafeAreaView style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+
       <Input placeholder='Product Name' label='Product Name' onChangeText={(text) => this.setState({produtName:text})}/>
       <Input placeholder='Product Description' label='Product Description' onChangeText={(text)=>this.setState({produtDesc:text})}/>
       <Input placeholder='Price' label='Price' onChangeText={(text)=>this.setState({price:text})} />
@@ -30,6 +45,8 @@ class UploadImage extends React.Component {
   callApi(){
     this.setState({showLoading:true});
     var token = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZG9uYXRlc3BvdC5kaXBsb21hZHMuY29tIiwiaWF0IjoxNTY5NzE4MTQ0LCJuYmYiOjE1Njk3MTgxNDQsImV4cCI6MTU3MDMyMjk0NCwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.q0oXzqlQVXVSNKE5ipuhanic8SU73nOltLx5CiaLd2s'
+    var config = {headers: {'Authorization': token }};
+
     // axios({
     //   url:'https://donatespot.diplomads.com/wp-json/wc/v3/products',
     //   method: 'POST',
@@ -55,18 +72,26 @@ class UploadImage extends React.Component {
       type:'simple',
       regular_price:this.state.price,
       description:this.state.produtDesc,
-      headers:{
-        'Authorization': token
-      }
-    })
+      "categories": [
+        {
+            "id": 45,
+            "name": "Melbourne CBD",
+            "slug": "melborune-cbd"
+        }
+      ],
+      "tags": [
+        {
+            "id": 62,
+            "name": "Household",
+            "slug": "household"
+        }
+      ]
+    },config)
     .then((response) => {
-      if(response.status===200){
-        Alert.alert("product added")
+      if(response.status===200 || response.status===201){
+        Alert.alert("Product added")
+        this.props.navigation.navigate('ItemsList');
         this.setState({showLoading:false})
-      //  this.props.navigation.navigate('ItemsList',{
-      //    token:token,
-      //    role:role,
-      //  });
       }else{
         Alert.alert('Failed to get token');
       }
