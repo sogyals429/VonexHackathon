@@ -7,12 +7,13 @@ class ItemsList extends React.Component {
     
     state = {
         items:[],
+        itemData:[],
         showLoading:false
     }
 
     filterSearch(text){
-        const newData = this.state.items.filter((item)=>{
-          const itemData = item.tags[0].name.toUpperCase()
+      const newData = this.state.items.filter((item)=>{
+          const itemData = item.name.toUpperCase()
           const textData = text.toUpperCase()
           return itemData.indexOf(textData)>-1
         });
@@ -20,6 +21,12 @@ class ItemsList extends React.Component {
           text:text,
           items: newData 
         });
+      }
+
+    setData(text){
+      this.setState({
+        items: this.state.itemData 
+      });
     }
 
  componentDidMount() {
@@ -36,8 +43,11 @@ class ItemsList extends React.Component {
 
         response.data.forEach(x=> {
             let {items} = this.state;
+            let {itemData} = this.state;
             items.push(x)
+            itemData.push(x)
             this.setState({items})
+            this.setState({itemData})
         })
         this.setState({showLoading:false});
     })
@@ -57,6 +67,7 @@ render() {
          <SearchBar
         placeholder="Filter Here..."
         lightTheme={true}
+        onClear={(text) => this.setData(text)}
         onChangeText={(text) => this.filterSearch(text)}
         value={this.state.text}
       />
