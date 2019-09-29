@@ -1,12 +1,13 @@
 import { ListItem, Input, SearchBar } from 'react-native-elements'
 import React from 'react';
 import axios from 'axios';
-import {View, SafeAreaView, ScrollView} from 'react-native';
+import {View, SafeAreaView, ScrollView, ActivityIndicator} from 'react-native';
 
 class ItemsList extends React.Component {
     
     state = {
-        items:[]
+        items:[],
+        showLoading:false
     }
 
     filterSearch(text){
@@ -24,6 +25,8 @@ class ItemsList extends React.Component {
  componentDidMount() {
     console.log("mounted");
 
+    this.setState({showLoading:true});
+
     var token ="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZG9uYXRlc3BvdC5kaXBsb21hZHMuY29tIiwiaWF0IjoxNTY5NzE4MTQ0LCJuYmYiOjE1Njk3MTgxNDQsImV4cCI6MTU3MDMyMjk0NCwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.q0oXzqlQVXVSNKE5ipuhanic8SU73nOltLx5CiaLd2s";
     var config = {headers: {'Authorization': token,'content-type':'application/json; charset=UTF-8' }};
   
@@ -36,22 +39,29 @@ class ItemsList extends React.Component {
             items.push(x)
             this.setState({items})
         })
+        this.setState({showLoading:false});
     })
     .catch(error => {
         console.log("axios error: " + error);
+    this.setState({showLoading:false});
     });
 
     }
 
-render() {     
+render() {   
+      
     return (
+      
     <SafeAreaView>
+        <ScrollView>
          <SearchBar
         placeholder="Filter Here..."
         lightTheme={true}
         onChangeText={(text) => this.filterSearch(text)}
         value={this.state.text}
       />
+        
+       <ActivityIndicator size="large" color="#0000ff" animating={this.state.showLoading} />
         {
     this.state.items.map((l, i) => (
       <ListItem
@@ -67,6 +77,7 @@ render() {
       />
     ))
     }
+    </ScrollView>
     </SafeAreaView>
  )
 };

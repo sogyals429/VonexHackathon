@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
   Alert,
+  ActivityIndicator
 } from 'react-native';
 import { Input,Button,Text } from 'react-native-elements';
 import axios from 'axios';
@@ -11,7 +12,7 @@ class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {token:'',username:'',password:''};
+    this.state = {token:'',username:'',password:'',showLoading:false};
   }
 
   render() {
@@ -22,6 +23,7 @@ class Login extends React.Component {
       <Input placeholder='Username' label='Username' onChangeText={(text)=>this.setState({username:text})}/>
       <Input placeholder='Password' label='Password' onChangeText={(text)=>this.setState({password:text})}
       secureTextEntry={true}/>
+      <ActivityIndicator size="large" color="#0000ff" animating={this.state.showLoading} />
       <Button title="Login" onPress={()=>this.callApi(this)}/>
       <Button title="Register" type="clear" onPress={()=>this.props.navigation.navigate('RegisterScreen')}/>
       </View>
@@ -30,7 +32,7 @@ class Login extends React.Component {
   }
 
   callApi(){
-   
+    this.setState({showLoading:true});
     let token;
     axios.post('https://donatespot.diplomads.com/wp-json/jwt-auth/v1/token',{
       username: this.state.username,
@@ -40,7 +42,8 @@ class Login extends React.Component {
       if(response.status===200){
         token = response.data.token
         this.setState({
-          token: token
+          token: token,
+          showLoading:false
        })
        this.props.navigation.navigate('ItemsList',{
          token:token
@@ -49,6 +52,9 @@ class Login extends React.Component {
         Alert.alert('Failed to get token');
       }
     }).catch(err=>{
+      this.setState({
+        showLoading:false
+     })
       Alert.alert("Username/Password incorrect")
     });
   }
