@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, BackHandler} from 'react-native';
 import { Image, Text,Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -7,6 +7,19 @@ class Details extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  onBackPress = () => {
+    this.props.navigation.navigate('ItemsList');
+    return true;
   }
 
   render() {
