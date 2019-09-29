@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, BackHandler} from 'react-native';
 import { Image, Text,Button} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import HTML from 'react-native-render-html';
 
 class Details extends React.Component {
   constructor(props) {
@@ -10,7 +10,25 @@ class Details extends React.Component {
     this.state = {product:navigation.getParam('product')};
   }
 
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  onBackPress = () => {
+    this.props.navigation.navigate('ItemsList');
+    return true;
+  }
+
   render() {
+    const { navigation } = this.props;
+    var product = navigation.getParam('product');
+
+    const htmlContent = product.description;
+
     return (
       <View
         style={{
@@ -21,8 +39,8 @@ class Details extends React.Component {
           <Image style={{height:350,width:400}}
           source={{uri:this.state.product.images[0].src}}
           />
-          <Text>Name: {this.state.product.name}</Text>
-          <Text style={{width:350}}>Description: {this.state.product.description}</Text>
+          <Text>Name: {product.name}</Text>
+          <HTML html={htmlContent} style={{width:350}}></HTML>
           <Button title="Request Pickup" onPress={()=>this.requestPick(this)}/>
         </View>
     );
