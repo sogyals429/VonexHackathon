@@ -20,6 +20,7 @@ class Register extends React.Component {
   render() {
     return ( 
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text h4>Register</Text>
       <Input placeholder='Email' label='Email' onChangeText={(text) => this.setState({email:text})} textContentType='emailAddress'/>
       <Input placeholder='Username' label='Username' onChangeText={(text)=>this.setState({username:text})}/>
       <Input placeholder='Password' label='Password' onChangeText={(text)=>this.setState({password:text})} secureTextEntry={true}/>
@@ -74,7 +75,7 @@ class Register extends React.Component {
       }
     }).then((response) => {
       if(response.status===200 || response.status===201){
-        this.props.navigation.navigate('App');
+        this.props.navigation.navigate('ItemsList');
       }else{
         console.log(response);
         Alert.alert('Failed to get token');

@@ -6,6 +6,8 @@ import HTML from 'react-native-render-html';
 class Details extends React.Component {
   constructor(props) {
     super(props);
+    const { navigation } = this.props;
+    this.state = {product:navigation.getParam('product')};
   }
 
   componentDidMount() {
@@ -26,7 +28,7 @@ class Details extends React.Component {
     var product = navigation.getParam('product');
 
     const htmlContent = product.description;
-
+    console.log("*", this.state.product.images[0] )
     return (
       <View
         style={{
@@ -34,10 +36,11 @@ class Details extends React.Component {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
+          <Text h3>{this.state.product.name}</Text>
           <Image style={{height:350,width:400}}
-          source={{uri:product.images[0].src}}
+          source={this.state.product.images[0] && this.state.product.images[0].src ? {uri: this.state.product.images[0].src  }:require('./image.jpeg') }
           />
-          <Text>Name: {product.name}</Text>
+          <Text h4>Description:</Text>
           <HTML html={htmlContent} style={{width:350}}></HTML>
           <Button title="Request Pickup" onPress={()=>this.requestPick(this)}/>
         </View>
@@ -46,7 +49,7 @@ class Details extends React.Component {
 
   requestPick(){
     this.props.navigation.navigate('Contact',{
-      product:this.product
+      product:this.state.product
     });
   }
 }

@@ -13,7 +13,8 @@ class Contact extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {name:'',email:'',subject:'',message:''};
+    const { navigation } = this.props;
+    this.state = {product:navigation.getParam('product')};
   }
 
   componentDidMount() {
@@ -30,14 +31,11 @@ class Contact extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
-    var product = navigation.getParam('product');
     return ( 
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Input placeholder='Name' label='Name' onChangeText={(text)=>this.setState({name:text})}/>
       <Input placeholder='Email' label='Email' onChangeText={(text)=>this.setState({email:text})}/>
-      <Input placeholder='Subject' label='Subject' onChangeText={(text)=>this.setState({subject:text})}/>
-      <Input placeholder='Message' label='Message' onChangeText={(text)=>this.setState({message:text})}/>
+      <Input placeholder='Product Requested:' label='Product Requested' onChangeText={(text)=>this.setState({subject:text})} value={this.state.product.name}/>
       <Button title="Send Request" onPress={()=>this.callApi(this)}/>
       </View>
     );
@@ -48,8 +46,8 @@ class Contact extends React.Component {
     const formData = new FormData();
     formData.append('your-name', this.state.name);
     formData.append('your-email', this.state.email);
-    formData.append('your-subject', this.state.subject);
-    formData.append('your-subject', this.state.subject);
+    formData.append('your-subject', this.state.product.name);
+    formData.append('your-message', this.state.product.description);
     axios({
       url: 'https://donatespot.diplomads.com/wp-json/contact-form-7/v1/contact-forms/50/feedback',
       method: 'POST',
@@ -61,6 +59,7 @@ class Contact extends React.Component {
 }).then((response) => {
      if(response.status===200){
       Alert.alert('Request Sent Successfully');
+      this.props.navigation.navigate('ItemsList');
       }
     else{
      Alert.alert('Failed to send');

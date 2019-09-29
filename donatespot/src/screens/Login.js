@@ -13,7 +13,7 @@ class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {token:'',username:'',password:'',showLoading:false};
+    this.state = {token:'',username:'',password:'',showLoading:false,role:''};
   }
 
   componentDidMount() {
@@ -65,6 +65,7 @@ class Login extends React.Component {
   callApi(){
     this.setState({showLoading:true});
     let token;
+    let role;
     axios.post('https://donatespot.diplomads.com/wp-json/jwt-auth/v1/token',{
       username: this.state.username,
       password: this.state.password
@@ -72,12 +73,15 @@ class Login extends React.Component {
     .then((response) => {
       if(response.status===200){
         token = response.data.token
+        role = response.data.roles[0]
         this.setState({
           token: token,
+          role:role,
           showLoading:false
        })
        this.props.navigation.navigate('ItemsList',{
-         token:token
+         token:token,
+         role:role,
        });
       }else{
         Alert.alert('Failed to get token');
