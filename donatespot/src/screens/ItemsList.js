@@ -1,13 +1,15 @@
 import { ListItem, Input, SearchBar } from 'react-native-elements'
 import React from 'react';
 import axios from 'axios';
-import {View, SafeAreaView, ScrollView, ActivityIndicator} from 'react-native';
+import {View, SafeAreaView, ScrollView, ActivityIndicator,Button} from 'react-native';
 
 class ItemsList extends React.Component {
     
     state = {
         items:[],
-        showLoading:false
+        showLoading:false,
+        role:'',
+        showButton:false
     }
 
     filterSearch(text){
@@ -23,6 +25,12 @@ class ItemsList extends React.Component {
     }
 
  componentDidMount() {
+    const { navigation } = this.props;
+    this.setState({role:navigation.getParam('role')});
+    if(this.state.role == "wcfm_vendor" || this.state.role == "administrator"){
+      this.state.showButton = true;
+    }
+    
     console.log("mounted");
 
     this.setState({showLoading:true});
@@ -62,6 +70,7 @@ render() {
       />
         
        <ActivityIndicator size="large" color="#0000ff" animating={this.state.showLoading} />
+       <Button title="Upload" onPress={() => this.props.navigation.navigate('UploadImage')}></Button>
         {
     this.state.items.map((l, i) => (
       <ListItem

@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 
 import SplashScreen from './src/screens/SplashScreen';
-import Home from './src/screens/Home';
 import ItemsList from './src/screens/ItemsList';
 import Login from './src/screens/Login';
 import Contact from './src/screens/Contact';
