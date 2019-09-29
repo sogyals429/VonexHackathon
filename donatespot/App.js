@@ -24,14 +24,16 @@ import Contact from './src/screens/Contact';
 import {createSwitchNavigator, createAppContainer} from 'react-navigation';
 import Details from './src/screens/Details';
 import Register from './src/screens/Register';
+import UploadImage from './src/screens/UploadImage';
 
 const InitialNavigator = createSwitchNavigator({
   Splash: SplashScreen,
-  App: ItemsList,
+  App: Login,
+  ItemsList: ItemsList,
   Details: Details,
-  LoginScreen: Login,
   RegisterScreen:Register,
-  Contact: Contact
+  Contact: Contact,
+  UploadImage: UploadImage
 });
 
 export default createAppContainer(InitialNavigator);

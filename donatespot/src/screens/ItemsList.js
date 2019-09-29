@@ -61,7 +61,7 @@ render() {
         subtitle={l.categories[0] && l.categories[0].name}
         rightTitle={l.tags[0] && l.tags[0].name}
         bottomDivider
-        onPress={() => this.props.navigation.navigate('LoginScreen',{
+        onPress={() => this.props.navigation.navigate('Details',{
             product:l
         })}
       />
