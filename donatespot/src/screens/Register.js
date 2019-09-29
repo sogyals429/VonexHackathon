@@ -20,14 +20,14 @@ class Register extends React.Component {
   render() {
     return ( 
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text h4>Register</Text>
+      <Text h3 style={{marginBottom:40}}>Register</Text>
       <Input placeholder='Email' label='Email' onChangeText={(text) => this.setState({email:text})} textContentType='emailAddress'/>
       <Input placeholder='Username' label='Username' onChangeText={(text)=>this.setState({username:text})}/>
       <Input placeholder='Password' label='Password' onChangeText={(text)=>this.setState({password:text})} secureTextEntry={true}/>
-      <Text>Role</Text>
+      <Text h4 style={{marginTop:20}}>Role</Text>
       <View  style={styles.fixToText}>
-      <Button raised={this.state.raised1} title="Picker" onPress={()=>{this.setStateButton1()}}></Button>
-      <Button raised={this.state.raised2} title="Packer" onPress={()=>{this.setStateButton2()}}></Button>
+      <Button buttonStyle={styles.buttonPick} raised={this.state.raised1} title="Picker" onPress={()=>{this.setStateButton1()}}></Button>
+      <Button buttonStyle={styles.buttonPack} raised={this.state.raised2} title="Packer" onPress={()=>{this.setStateButton2()}}></Button>
       </View>
 
       </View>
@@ -88,9 +88,20 @@ class Register extends React.Component {
 
 const styles = StyleSheet.create({
   fixToText: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  buttonPick:{
+    width:250,
+    height:50,
+    marginBottom:20,
+    marginTop:20,
+    backgroundColor:'darkblue'
+  },
+  buttonPack:{
+    width:250,
+    height:50,
+  }
 });
 
 
