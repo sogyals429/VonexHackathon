@@ -23,14 +23,14 @@ class Login extends React.Component {
       <View style={styles.View}>
       <Image
           source={{ uri: "https://donatespot.diplomads.com/wp-content/themes/shopkit/demos/logo-material.png" }}
-          style={styles.viewLogo}/>
-      <Text h1>DonateSpot</Text>    
-      <Input placeholder='Username' label='Username' onChangeText={(text)=>this.setState({username:text})}/>
-      <Input placeholder='Password' label='Password' onChangeText={(text)=>this.setState({password:text})}
+          containerStyle={styles.viewLogo}/>
+      <Text style={{marginBottom:20}} h1>DonateSpot</Text>    
+      <Input containerStyle={styles.inputBox} placeholder='Username' label='Username' onChangeText={(text)=>this.setState({username:text})}/>
+      <Input containerStyle={styles.inputBox} placeholder='Password' label='Password' onChangeText={(text)=>this.setState({password:text})}
       secureTextEntry={true}/>
       <ActivityIndicator size="large" color="#0000ff" animating={this.state.showLoading} />
-      <Button style={styles.button} title="Login" onPress={()=>this.callApi(this)}/>
-      <Button title="Register" type="clear" onPress={()=>this.props.navigation.navigate('RegisterScreen')}/>
+      <Button buttonStyle={styles.loginbutton} title="Login" onPress={()=>this.callApi(this)}/>
+      <Button buttonStyle={styles.regbutton} title="Register" type="outline" onPress={()=>this.props.navigation.navigate('RegisterScreen')}/>
       </View>
     );
     
@@ -69,13 +69,22 @@ const styles = StyleSheet.create ({
   View:{
     flex: 1, justifyContent: "center", alignItems: "center" 
   },
+  inputBox:{
+    width:350
+  },
   viewLogo:{
-    height: 150,
-    width: 150,
+    marginBottom:10,
+    height: 180,
+    width: 170,
     resizeMode: 'contain'
   },
-  button:{
-    marginTop:100
+  loginbutton:{
+    marginTop:20,
+    width:300
+  },
+  regbutton:{
+    marginTop:30,
+    width:300,
   }
 })
 
