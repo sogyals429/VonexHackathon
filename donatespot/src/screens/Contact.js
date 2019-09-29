@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
   Alert,
+  BackHandler
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input,Button,Text } from 'react-native-elements';
@@ -14,6 +15,19 @@ class Contact extends React.Component {
     super(props);
     const { navigation } = this.props;
     this.state = {product:navigation.getParam('product')};
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+
+  onBackPress = () => {
+    this.props.navigation.navigate('ItemsList');
+    return true;
   }
 
   render() {

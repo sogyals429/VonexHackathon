@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, BackHandler} from 'react-native';
 import { Image, Text,Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -10,6 +10,7 @@ class Details extends React.Component {
     this.state = {product:navigation.getParam('product')};
   }
 
+
   render() {
     return (
       <View
@@ -18,8 +19,8 @@ class Details extends React.Component {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-          <Image style={{height:250,width:400}}
-          source={{uri:this.state.product.images[0].src}}
+          <Image style={{height:350,width:400}}
+          source={{uri:product.images[0].src}}
           />
           <Text>Name: {this.state.product.name}</Text>
           <Text style={{width:350}}>Description: {this.state.product.description}</Text>
