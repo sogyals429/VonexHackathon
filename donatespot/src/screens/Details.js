@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import { Avatar, Text,Button} from 'react-native-elements';
+import { Image, Text,Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Details extends React.Component {
@@ -19,13 +19,11 @@ class Details extends React.Component {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-          <Avatar
-          size="large"
-          rounded
+          <Image style={{height:250,width:400}}
           source={{uri:product.images[0].src}}
           />
           <Text>Name: {product.name}</Text>
-          <Text>Description: {product.description}</Text>
+          <Text style={{width:350}}>Description: {product.description}</Text>
           <Button title="Request Pickup" onPress={()=>this.requestPick(this)}/>
         </View>
     );
