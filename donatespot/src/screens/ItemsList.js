@@ -11,7 +11,7 @@ class ItemsList extends React.Component {
 
     filterSearch(text){
         const newData = this.state.items.filter((item)=>{
-          const itemData = item.categories[0].name.toUpperCase()
+          const itemData = item.tags[0].name.toUpperCase()
           const textData = text.toUpperCase()
           return itemData.indexOf(textData)>-1
         });
@@ -29,6 +29,7 @@ class ItemsList extends React.Component {
   
     axios.get('https://donatespot.diplomads.com/wp-json/wc/v3/products/',config)
     .then(response => {
+        console.log("response success ");
 
         response.data.forEach(x=> {
             let {items} = this.state;
@@ -46,7 +47,7 @@ render() {
     return (
     <SafeAreaView>
          <SearchBar
-        placeholder="Type Here..."
+        placeholder="Filter Here..."
         lightTheme={true}
         onChangeText={(text) => this.filterSearch(text)}
         value={this.state.text}
@@ -55,9 +56,10 @@ render() {
     this.state.items.map((l, i) => (
       <ListItem
         key={i}
-        leftAvatar={{ source: { uri: l.images[0].src } }}
+        leftAvatar={{ source: { uri:l.images[0] && l.images[0].src } }}
         title={l.name}
-        subtitle={l.categories[0].name}
+        subtitle={l.categories[0] && l.categories[0].name}
+        rightTitle={l.tags[0] && l.tags[0].name}
         bottomDivider
         onPress={() => this.props.navigation.navigate('LoginScreen',{
             product:l
