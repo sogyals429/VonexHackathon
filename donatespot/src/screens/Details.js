@@ -1,12 +1,11 @@
 import React from 'react';
 import {View, BackHandler} from 'react-native';
 import { Image, Text,Button} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import HTML from 'react-native-render-html';
 
 class Details extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
   componentDidMount() {
@@ -25,6 +24,9 @@ class Details extends React.Component {
   render() {
     const { navigation } = this.props;
     var product = navigation.getParam('product');
+
+    const htmlContent = product.description;
+
     return (
       <View
         style={{
@@ -36,7 +38,7 @@ class Details extends React.Component {
           source={{uri:product.images[0].src}}
           />
           <Text>Name: {product.name}</Text>
-          <Text style={{width:350}}>Description: {product.description}</Text>
+          <HTML html={htmlContent} style={{width:350}}></HTML>
           <Button title="Request Pickup" onPress={()=>this.requestPick(this)}/>
         </View>
     );
