@@ -42,14 +42,14 @@ class Login extends React.Component {
         this.setState({
           token: token
        })
-       this.props.navigation.navigate('App',{
+       this.props.navigation.navigate('ItemsList',{
          token:token
        });
       }else{
         Alert.alert('Failed to get token');
       }
     }).catch(err=>{
-      console.log(err);
+      Alert.alert("Username/Password incorrect")
     });
   }
 }
