@@ -19,7 +19,7 @@ class Details extends React.Component {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-          <Image style={{height:250,width:400}}
+          <Image style={{height:350,width:400}}
           source={{uri:product.images[0].src}}
           />
           <Text>Name: {product.name}</Text>

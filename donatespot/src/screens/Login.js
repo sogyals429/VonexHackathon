@@ -75,7 +75,7 @@ const styles = StyleSheet.create ({
     resizeMode: 'contain'
   },
   button:{
-    marginTop: 100
+    marginTop:100
   }
 })
 
