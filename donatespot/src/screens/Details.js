@@ -10,7 +10,6 @@ class Details extends React.Component {
     this.state = {product:navigation.getParam('product')};
   }
 
-
   render() {
     return (
       <View
