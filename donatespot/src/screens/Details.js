@@ -2,6 +2,7 @@ import React from 'react';
 import {View, BackHandler} from 'react-native';
 import { Image, Text,Button} from 'react-native-elements';
 import HTML from 'react-native-render-html';
+import MapView from 'react-native-maps';
 
 class Details extends React.Component {
   constructor(props) {
@@ -43,6 +44,15 @@ class Details extends React.Component {
           <Text h4>Description:</Text>
           <HTML html={htmlContent} style={{width:350}}></HTML>
           <Button title="Request Pickup" onPress={()=>this.requestPick(this)}/>
+
+          <MapView
+    initialRegion={{
+      latitude: 37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    }}
+  />
         </View>
     );
   }
