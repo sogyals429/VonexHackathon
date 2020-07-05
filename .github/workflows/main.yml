@@ -31,4 +31,6 @@ jobs:
     - name: Update Packages
       run: |
         cd donatespot
+        npm install
+        npm update fix
         npm update
