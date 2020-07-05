@@ -27,12 +27,16 @@ jobs:
         curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
         sudo apt install nodejs
 
-    # Runs a single command using the runners shell
+    - name: Install Yarn
+      run: |
+        curl -o- -L https://yarnpkg.com/install.sh | bash
+
     - name: Update Packages
       run: |
         cd donatespot
         npm install
         npm update
+        yarn install
     - name: Push Changes
       run: |
         git config --global user.name "github-actions[bot]"
