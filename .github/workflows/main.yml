@@ -35,6 +35,7 @@ jobs:
       run: |
         cd donatespot
         rm package-lock.json
+        rm yarn.lock
         npm install
         npm update
         yarn install
