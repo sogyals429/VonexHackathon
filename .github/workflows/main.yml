@@ -32,5 +32,9 @@ jobs:
       run: |
         cd donatespot
         npm install
-        npm audit fix
         npm update
+    - name: Push Changes
+      run: |
+        git add --all
+        git commit -m "Updating packages"
+        git push
