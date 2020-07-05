@@ -38,5 +38,5 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github_bot@mail.com"
         git add --all
-        git commit -m "Updating packages"
+        git diff --quiet && git diff --staged --quiet || git commit -am 'Updating changes'
         git push
