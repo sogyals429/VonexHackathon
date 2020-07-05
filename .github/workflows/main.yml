@@ -35,6 +35,8 @@ jobs:
         npm update
     - name: Push Changes
       run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github_bot@mail.com"
         git add --all
         git commit -m "Updating packages"
         git push
