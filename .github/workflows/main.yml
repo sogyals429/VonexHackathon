@@ -22,7 +22,13 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    - name: Install NodeJS
+      run: | 
+        curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+        sudo apt install nodejs
+
     # Runs a single command using the runners shell
-    - name: Run a one-line script
+    - name: Update Packages
       run: |
-        echo test
+        cd donatespot
+        npm update
