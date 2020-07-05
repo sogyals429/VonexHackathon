@@ -33,6 +33,7 @@ jobs:
 
     - name: Update Packages
       run: |
+        rm package-lock.json
         cd donatespot
         npm install
         npm update
