@@ -35,8 +35,6 @@ jobs:
         rm yarn.lock
         npm install
         npm update
-        yarn install
-        yarn upgrade
     - name: Push Changes
       run: |
         git config --global user.name "github-actions[bot]"
